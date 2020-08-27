@@ -5,15 +5,11 @@ tag: [Godot, 게임개발]
 summary: Godot 엔진에서 yield를 어떻게 사용하는지 알아보자.
 ---
 
-
-
 ## 코루틴 (Coroutine)
 
 **코루틴**이란, 함수의 실행을 잠시 일시 정지시켰다가 재개할 수 있는 기능이다. Python을 쓰던 사람이라면, generator의 개념에 익숙할 텐데, 제너레이터가 바로 코루틴의 일종이다. Godot 3에서는 `yield` 키워드를 통해 코루틴을 사용할 수 있다. 하지만, 그 행동이 비직관적인 데다가 매뉴얼도 제대로 작성되어있지 않아 이해하는 데 어려움이 많다. 이 글에서는 어떻게 `yield` 키워드를 잘 사용할 수 있는지 이야기해보려고 한다.
 
-
-
-## `yield()`
+## yield()
 
 GDScript의 `yield()` 함수는 기본적으로 다음과 같이 정의된다.
 
@@ -39,7 +35,7 @@ func my_func_one():
     y.resume()
 ```
 
-`var y = my_func_two()`라인에서 `my_func_two()`가 호출되는 것까지는 그냥 `return`과 동일하다. 하지만 `my_func_two()` 블럭 안에서 `yield()`를 만났을 때, `my_func_two()`의 상태는 `GDScriptFunctionState`로 저장되어 반환된다. (혹은, _주도권_이 caller에게 넘어간다.) 이 상태는 `resume()` 함수를 통해 재개시킬 수 있다. 따라서, 위 코드의 출력은
+`var y = my_func_two()`라인에서 `my_func_two()`가 호출되는 것까지는 그냥 `return`과 동일하다. 하지만 `my_func_two()` 블럭 안에서 `yield()`를 만났을 때, `my_func_two()`의 상태는 `GDScriptFunctionState`로 저장되어 반환된다. (혹은, *주도권*이 caller에게 넘어간다.) 이 상태는 `resume()` 함수를 통해 재개시킬 수 있다. 따라서, 위 코드의 출력은
 
 ```
 One
@@ -50,9 +46,7 @@ Four
 
 가 된다.
 
-
-
-## `yield(object, signal)`
+## yield(object, signal)
 
 `yield`에 `signal`을 결합시킬 때 이 키워드의 진정한 힘이 나타난다. (signal에 대해서는 언젠가 다룰 기회가 있을 것이다.) 이 경우, `yield`는 `object`에 주도권을 넘겨준 뒤, `signal` 시그널이 감지될 때까지 함수의 실행을 일시 정지시킨다. 이를 활용한 대표적인 예제가 타이머이다.
 
@@ -106,8 +100,6 @@ Ready
 2
 1
 ```
-
-
 
 ## Godot 4.0
 

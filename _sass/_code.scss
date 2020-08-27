@@ -2,6 +2,8 @@ pre,
 pre code {
   background-color: transparent;
   border-radius: $pre-border-radius;
+  padding: 0;
+  margin: 0;
 }
 
 pre,
@@ -15,7 +17,7 @@ code {
 
 pre {
   padding: 1.125em;
-  line-height: 1.11;
+  line-height: 1.5rem;
   overflow-x: scroll;
   margin-bottom: 0.88em;
   background-color: $pre-background-color;

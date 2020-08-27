@@ -70,15 +70,15 @@ telegram_username:
 vk_id:
 
 # Post sharing icons
-show_sharing_icons:       false
+show_sharing_icons:       true
 # Change to 'true' to enable individual icons
 share_facebook:           true
 share_twitter:            true
-share_googleplus:         true
+share_googleplus:         false
 share_linkedin:           false
 share_digg:               false
 share_tumblr:             false
-share_reddit:             false
+share_reddit:             true
 share_stumbleupon:        false
 share_hackernews:         false
 
@@ -87,14 +87,14 @@ text:
     newer:                '새 포스트'
     older:                '옛 포스트'
   share_buttons:
-    text:                 '이 포스트 공유하기'
+    text:                 '이 포스트 공유하기:'
     facebook:             'Facebook에 공유하기'
     twitter:              'Twitter에 공유하기'
     googleplus:           'Google+에 공유하기'
     linkedin:             'Share on LinkedIn'
     digg:                 'Share on Digg'
     tumblr:               'Share on Tumblr'
-    reddit:               'Share on Reddit'
+    reddit:               'Reddit에 공유하기'
     stumbleupon:          'Share on StumbleUpon'
     hackernews:           'Share on Hacker News'
   post:
