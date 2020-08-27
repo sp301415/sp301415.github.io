@@ -1,0 +1,16 @@
+.tags { margin-top: 1rem; }
+
+.tags .list {
+        margin-top: 10px;
+        padding-top: 10px;
+        position: relative;
+            }
+
+.tags  .list .item {
+        padding: 6px 10px;
+        text-transform: uppercase;
+        border-radius: $border-radius;
+        background: $lighter-gray;
+        color: $dark-gray;
+        text-shadow: none;
+       }

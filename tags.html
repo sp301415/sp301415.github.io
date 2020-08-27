@@ -1,0 +1,44 @@
+---
+layout: page
+permalink: /tags/
+title: Tags
+---
+
+<div class = "tags">
+<div class="list">
+
+    {% assign tags_list = site.tags %}
+
+    {% if tags_list.first[0] == null %}
+        {% for tag in tags_list %}
+            <a class="item" href="#{{ tag | slugify }}">{{ tag }}</a>
+        {% endfor %}
+    {% else %}
+        {% for tag in tags_list %}
+            <a class="item" href="#{{ tag[0] | slugify }}">{{ tag[0] }}</a>
+        {% endfor %}
+    {% endif %}
+
+    {% assign tags_list = nil %}
+</div>
+</div>
+
+<hr>
+
+<div id="archives">
+{% for tag in site.tags %}
+  <div class="archive-group">
+    {% capture tag_name %}{{ tag | first }}{% endcapture %}
+    <div id="#{{ tag_name | slugize }}"></div>
+    <p></p>
+
+    <h3 class="tag-head">{{ tag_name }}</h3>
+    <a name="{{ tag_name | slugize }}"></a>
+    {% for post in site.tags[tag_name] %}
+    <article class="archive-item">
+      <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
+    </article>
+    {% endfor %}
+  </div>
+{% endfor %}
+</div>

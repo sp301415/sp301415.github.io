@@ -1,0 +1,134 @@
+# Site settings
+title:                    Null Space
+email:                    sp301415@gmail.com
+author:                   sp301415
+description:              "A student interested in mathematics, cryptography, music and film"
+baseurl:                  ""
+url:                      "https://sp301415.github.io"
+date_format:              "%Y-%m-%d"
+header_pages:
+ - search.html
+ - tags.html
+ - about.md
+ - contact.html
+
+# Google services
+google_verification:
+# Use either direct GA implementation or set up GTM account
+# - using both will skew your data (leave blank to not use at all)
+google_analytics:         UA-102283165-1
+google_tag_manager:
+# Bing services
+bing_verification:
+
+# Optional features
+animated:                 false
+show_related_posts:       false
+show_post_footers:        false
+show_social_icons:        false
+ajaxify_contact_form:     false
+enable_mathjax:           true
+extended_fonts:           false
+enable_anchorjs:          true
+# Preview image for social media aka og:image and twitter:image
+post_preview_image:       true
+
+# Facebook Page integration
+# (for instant articles and other stuff)
+fb_page:                  false
+fb_page_id:
+
+# Disqus post comments
+# (leave blank to disable Disqus)
+disqus_shortname:
+
+# txtpen post comments
+# (leave blank to disable txtpen)
+txtpen_sitename:
+
+# Facebook Comments plugin
+# (leave blank to disable Facebook Comments, otherwise set it to true)
+facebook_comments:
+facebook_appid:
+facebook_comments_number: 10
+
+# Social icons
+github_username:          sp301415
+bitbucket_username:
+stackoverflow_id:
+twitter_username:
+skype_username:
+steam_nickname:
+google_plus_id:
+linkedin_username:
+angellist_username:
+medium_id:
+bitcoin_url:
+paypal_url:
+flattr_button:
+telegram_username:
+vk_id:
+
+# Post sharing icons
+show_sharing_icons:       false
+# Change to 'true' to enable individual icons
+share_facebook:           true
+share_twitter:            true
+share_googleplus:         true
+share_linkedin:           false
+share_digg:               false
+share_tumblr:             false
+share_reddit:             false
+share_stumbleupon:        false
+share_hackernews:         false
+
+text:
+  pagination:
+    newer:                '새 포스트'
+    older:                '옛 포스트'
+  share_buttons:
+    text:                 '이 포스트 공유하기'
+    facebook:             'Facebook에 공유하기'
+    twitter:              'Twitter에 공유하기'
+    googleplus:           'Google+에 공유하기'
+    linkedin:             'Share on LinkedIn'
+    digg:                 'Share on Digg'
+    tumblr:               'Share on Tumblr'
+    reddit:               'Share on Reddit'
+    stumbleupon:          'Share on StumbleUpon'
+    hackernews:           'Share on Hacker News'
+  post:
+    updated:              '업데이트됨'
+    minute_read:          '분 소요 예상'
+    related_posts:        '관련있는 주제'
+  index:
+    coming_soon:          '조금만 기다리십시오...'
+  contact:
+    email:                '이메일 주소'
+    content:              '무엇을 알려주고 싶나요?'
+    subject:              'New submission!'
+    submit:               '연락하기'
+    ajax:
+      sending:            '보내는 중..'
+      sent:               '보내기 완료!'
+      error:              '에러가 발생했습니다!'
+  thanks:                 '연락해 주셔서 감사합니다. 곧 답장할게요!'
+  og_locale:              'ko_KR'
+  timezone:               'Asia/Seoul'
+
+# Build settings
+markdown:                 kramdown
+redcarpet:
+  extensions:             ['smart', 'tables', 'with_toc_data']
+permalink:                pretty
+paginate:                 4
+sass:
+  style:                  compressed
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+# https://github.com/jekyll/jekyll/issues/2938
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
