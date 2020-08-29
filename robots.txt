@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: */about/
+Disallow: */contact/
+Disallow: */search/
+Disallow: */tags/
+Disallow: */thanks/
+Disallow: */page*/
+
+Sitemap: https://sp301415.github.io/sitemap.xml
