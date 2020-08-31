@@ -1,7 +1,7 @@
 ---
 layout: null
 ---
-var CACHE_NAME = "pixyll2";
+var CACHE_NAME = "sp301415-blog-cache";
 
 self.addEventListener("install", function(e) {
   e.waitUntil(
@@ -39,6 +39,7 @@ addEventListener("fetch", function(e) {
           "https://fonts.gstatic.com",
           "https://maxcdn.bootstrapcdn.com",
           "https://cdnjs.cloudflare.com"
+          "https://cdn.jsdelivr.net"
         ];
         hosts.map(function(host) {
           if (e.request.url.indexOf(host) === 0) {
