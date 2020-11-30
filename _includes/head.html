@@ -36,20 +36,16 @@
   <link rel="stylesheet" href="{{ "/css/pixyll.css" | prepend: site.baseurl }}?{{ site.time | date: "%Y%m%d%H%M " }}" type="text/css">
 
   <!-- Fonts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
   <script>
-    window.WebFontConfig = {
-        custom: {
-            families: ['Spoqa Han Sans:100,300,400,700', 'Hack'],
-            urls: ['https://cdnjs.cloudflare.com/ajax/libs/spoqa-han-sans/2.1.1/css/SpoqaHanSans-kr.min.css',
-            'https://cdn.jsdelivr.net/npm/hack-font/build/web/hack-subset.css']
-        },
+    WebFont.load({
+      custom: {
+                families: ['Spoqa Han Sans:100,300,400,700', 'Hack'],
+                urls: ['/css/SpoqaHanSansNeo/SpoqaHanSans-kr.css',
+                        'https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack-subset.min.css']
+        }, 
         timeout: 60000
-    };
-    (function(d) {
-        var wf = d.createElement('script'), s = d.scripts[0];
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
-        s.parentNode.insertBefore(wf, s);
-    })(document);
+    });
   </script>
   <!--
     {% if site.extended_fonts %}
@@ -65,18 +61,21 @@
 
   <!-- MathJax -->
   {% if site.enable_mathjax %}
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML.js">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
   </script>
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/CommonHTML"],
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    }
-  });
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.min.js">
   </script>
   {% endif %}
 
