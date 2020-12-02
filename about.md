@@ -11,8 +11,7 @@ permalink: /about/
   <footer><cite title = "Pink Floyd, Wish You Were Here">Pink Floyd, Wish You Were Here</cite></footer>
 </blockquote>
 
-
-수학을 공부하는 학생. Semi-Cinephile. Apple Enthusiastic. 상산고등학교 졸업. DGIST 18학번.
+Interested in Mathematics and Cryptography. Semi-Cinephile. Studying at DGIST.
 
 ---
 - Made with Jekyll
