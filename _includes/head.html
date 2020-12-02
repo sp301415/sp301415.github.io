@@ -36,12 +36,12 @@
   <link rel="stylesheet" href="{{ "/css/pixyll.css" | prepend: site.baseurl }}?{{ site.time | date: "%Y%m%d%H%M " }}" type="text/css">
 
   <!-- Fonts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
   <script>
     WebFont.load({
       custom: {
                 families: ['Spoqa Han Sans:100,300,400,700', 'Hack'],
-                urls: ['/css/SpoqaHanSans-kr.css',
+                urls: ['//cdnjs.cloudflare.com/ajax/libs/spoqa-han-sans/3.1.0/css/SpoqaHanSansNeo.min.css',
                         '//cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack-subset.min.css']
         }, 
         timeout: 60000
@@ -73,9 +73,9 @@
       }
     };
   </script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="//polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
-          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.min.js">
+          src="//cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.min.js">
   </script>
   {% endif %}
 
