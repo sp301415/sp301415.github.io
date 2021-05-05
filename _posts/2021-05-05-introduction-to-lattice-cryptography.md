@@ -3,7 +3,7 @@ title: 격자 암호의 소개
 date: 2021-05-05
 tag: [수학, 암호학]
 summary: 최근 Post-Quantam Cryptography에서 각광받는 격자 암호에 대해 알아보자.
-image: 
+image: images/introduction-to-lattice-cryptography/lattice.png
 ---
 
 > 아직 업데이트 중입니다.

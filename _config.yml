@@ -133,3 +133,11 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+
+defaults:
+  -
+    scope:
+      path: "/files/*"
+    values:
+      sitemap: false
+      

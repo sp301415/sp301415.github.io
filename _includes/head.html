@@ -93,11 +93,7 @@
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:site_name" content="{{ site.title | xml_escape }}"> 
   {% if site.post_preview_image %}
-  {% if page.image %}
-  <meta property="og:image" content="{{ site.url }}/images/{{ page.image }}"> 
-  {% else %}
-  <meta property="og:image" content="{{ site.url }}/images/profile-1024.png"> 
-  {% endif %}
+  <meta property="og:image" content="{% if page.image %}{{ site.url }}/{{ page.image }}{% else %}{{ site.url }}/images/profile-1024.png{% endif %}"> 
   {% endif %}
 
   <!-- Twitter Card -->
@@ -110,11 +106,7 @@
   <meta name="twitter:description" content="{% if page.summary %}{{ page.summary }}{% else %}{{ site.description }}{% endif %}" />
   <meta name="twitter:url" content="{{ site.url }}{{ page.url }}" /> 
   {% if site.post_preview_image %}
-  {% if page.image %}
-  <meta property="twitter:image" content="{{ site.url }}/images/{{ page.image }}"> 
-  {% else %}
-  <meta property="twitter:image" content="{{ site.url }}/images/profile-1024.png"> 
-  {% endif %}
+  <meta property="twitter:image" content="{% if page.image %}{{ site.url }}/{{ page.image }}{% else %}{{ site.url }}/images/profile-1024.png{% endif %}"> 
   {% endif %}
 
   <!-- Icons -->
