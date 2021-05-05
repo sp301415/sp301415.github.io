@@ -4,14 +4,15 @@ title: About
 permalink: /about/
 ---
 
-<blockquote>
-  <p>
-  We're just two lost souls swimming in a fish bowl...
-  </p>
-  <footer><cite title = "Pink Floyd, Wish You Were Here">Pink Floyd, Wish You Were Here</cite></footer>
-</blockquote>
+Hello! Welcome to my blog. 
 
-Interested in Mathematics and Cryptography. Semi-Cinephile. Studying at DGIST.
+I am mainly interested in: 
+- Mathematical Cryptography
+- Game Development
+- Gadgets
+- [Watching Films](https://letterboxd.com/sp301415/)
+
+For more information, please take a look at my [CV](/files/CV.pdf) :)
 
 ---
 - Made with Jekyll

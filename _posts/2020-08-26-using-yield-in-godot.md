@@ -1,5 +1,5 @@
 ---
-title: Godot에서 yield 키워드 사용하기
+title: Godot에서 yield 사용하기
 date: 2020-08-26
 tag: [Godot, 게임개발]
 summary: Godot 엔진에서 yield를 어떻게 사용하는지 알아보자.

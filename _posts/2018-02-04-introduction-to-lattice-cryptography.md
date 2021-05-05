@@ -1,8 +1,9 @@
 ---
-title: 격자 암호(Lattice Cryptography)의 소개
-date: 2018-02-04
+title: 격자 암호의 소개
+date: 2021-05-05
 tag: [수학, 암호학]
 summary: 최근 Post-Quantam Cryptography에서 각광받는 격자 암호에 대해 알아보자.
+image: 
 ---
 
 > 아직 업데이트 중입니다.
@@ -11,147 +12,72 @@ summary: 최근 Post-Quantam Cryptography에서 각광받는 격자 암호에 �
 
 ### Lattice and Basis
 
-추상적으로, $\mathbb{R}^n$의 이산적 덧셈부분군(discrete additive subgroup) $\mathcal{L}$을 **격자**(Lattice)라고 한다. *덧셈부분군*이라는 것은 $\mathcal{L}$이 $\mathbb{R}^n$의 부분군(subgroup)이며 덧셈에 대해 닫혀있다는 것을 뜻한다. *이산적*이라는 것은 모든 $\mathbf{v} \in \mathcal{L}$에 대하여 적당한 양수 $\varepsilon > 0$이 존재하여
+눈을 감고 격자를 떠올려 보자. 보통이라면 체스판처럼 생긴 무언가를 떠올릴 것이다. 체스판의 각 점들은 일정한 간격으로 떨어진 채 평면을 가득 채운다. 이처럼, 일정한 규칙성을 가지고 $\mathbb R^n$에 놓인 점들을 **격자(Lattice)**라고 부른다.
 
-$$
-\mathcal{L} \cap \{ \mathbf{w} \in \mathbb{R}^n : \lVert \mathbf{v} - \mathbf{w} \rVert < \varepsilon \} = \{ \mathbf{v} \}
-$$
+![Lattice](/images/introduction-to-lattice-cryptography/lattice.png)
 
-가 성립함을 뜻한다.
-단번에 이 말을 이해하기엔 쉽지 않으니 차근차근 논리를 전개시켜 나가자.
+선형대수학을 조금 배운 독자라면 기저(Basis)에 대해서 들어보았을 것이다. 격자에서의 규칙성 또한 결국 기저에 의해 결정된다. 정의를 조금 더 구체화시켜보자. 
 
-직관적으로, 일차독립인 벡터 $\mathcal{B}=(\mathbf{b}_1, \mathbf{b}_2, \cdots, \mathbf{b}_n) \in \mathbb{R}^n$에 대해
+**Definition. (Lattice).** 일차독립인 벡터 $\mathcal{B} = \{\mathbf b_1, \mathbf b_2, \cdots, \mathbf b_n\} \in \mathbb R^n$에 대해, 격자 $\mathcal L$ (기저를 강조하고 싶을 때는 $\mathcal L (\mathcal B)$)은
 
-$$
-\mathcal{L} = \mathcal{B} \cdot \mathbb{Z}^n =\left\{ \sum_{i=1}^n z_i \mathbf{b}_i : z_i \in \mathbb{Z} \right\}
-$$
+$$\mathcal{L}(\mathcal B)  =\left\{ \sum_{i=1}^n z_i \mathbf{b}_i : z_i \in \mathbb{Z} \right\}$$
 
-인 공간 $\mathcal{L}$을 $\mathbb{R}^n$의 격자라 하고, $\mathcal{L}$을 생성하는 집합 $\mathcal{B}$를 $\mathcal{L}$의 **기저**(Basis)라 한다. 이 정의는 처음의 정의와 동치이다. 이를 증명하기 전에 먼저 격자의 기본적인 성질을 살펴보도록 하자.
+로 정의되며, 이 때 $\mathcal B$를 $\mathcal L$의 **기저(Basis)**라고 부른다. 
 
-다시 $\mathcal{L}$ 위의 벡터집합 $\mathcal{V} = (\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n)$를 생각하자. 기저는 $\mathcal{L}$을 생성하므로 $\mathcal{V}$를 $\mathcal{B}$의 (정수 계수) 일차결합으로 나타낼 수 있다.
+요약하자면, 격자는 기저의 정수계수 일차결합으로 생성되는 $\mathbb R^n$의 부분집합이다. 위에서 예를 들었던 "체스판"의 경우에는, $\{(1, 0), (0, 1)\}$이 생성하는 격자로 이해할 수 있다. 정수항을 가진 벡터로만 기저를 만들어낼 필요도 없다. 유리수 격자도 가능한 것이다. 하지만, 논의의 편의성을 위해 앞으로는 정수항을 가진, full-rank 격자로 한정지어 이야기하도록 하겠다.
 
-$$
-\begin{gather}
-\mathbf{v_1} = z_{11}\mathbf{b}_1 + z_{12}\mathbf{b}_2 + \cdots + z_{1n}\mathbf{b}_n\\
-\mathbf{v_2} = z_{21}\mathbf{b}_1 + z_{22}\mathbf{b}_2 + \cdots +  z_{2n}\mathbf{b}_n\\
-\vdots&  \\
-\mathbf{v_n} = z_{n1}\mathbf{b}_1 + z_{n2}\mathbf{b}_2 + \cdots + z_{nn}\mathbf{b}_n\\
-\end{gather}
-$$
+그렇다면, 한 격자를 생성하는 기저는 유일할까? 조금만 생각해본다면 대답은 "아니오"라는 것을 짐작할 수 있을 것이다. 당장 체스판만 보더라도, $\{(1, 0), (1, 1)\}$ 또한 기저가 되기 때문이다. 실제로 한 격자의 기저는 무한할뿐만 아니라, 다음 정리에 따라 한 기저에서 다른 기저를 무한히 만들어낼 수 있다.
 
-이는 행렬
+**Theorem.** 어떤 두 기저 $\mathcal B_1, \mathcal B_2$가 같은 격자를 생성할 필요충분조건은 $\det U = \pm 1$인 적당한 정사각행렬[^1] $U$가 존재해서 $\mathcal B_1 = U \cdot \mathcal B_2$인 것이다.
 
-$$
-U =
-\begin{pmatrix}
-z_{11} & z_{12} & \cdots & z_{1n} \\
-z_{21} & z_{22} & \cdots & z_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-z_{n1} & z_{n2} & \cdots & z_{nn} \\
-\end{pmatrix}
-$$
+**proof.** $\Rightarrow$)  $\mathcal B_1, \mathcal B_2$가 같은 격자를 생성한다고 하자. 격자의 정의에 의해서, 적당한 rank n 정수계수 정사각행렬 $U, V$가 존재해서, $\mathcal B_1 = U\mathcal B_2$와 $\mathcal B_2 = V\mathcal B_1$를 만족한다. 따라서, $\mathcal B_1 = UV\mathcal B_1$이며,
 
-을 이용하여 $\mathcal{V} = U \cdot \mathcal{B}$로 표현할 수도 있다. 이제 반대로 $\mathcal{B}$를 $\mathcal{V}$로 표현해 보자. $\mathcal{V}$를 $\mathcal{L}$의 또다른 기저로 간주하는 것이다. 즉,
+$$\mathcal B_1^T \mathcal B_1 = \mathcal B_1^T (UV)^T(UV)\mathcal B_1$$
 
-$$
-\mathcal{B} = U^{-1} \cdot \mathcal{V}
-$$
+이므로, $\det(\mathcal B_1^T \mathcal B_1) = \det(\mathcal B_1^T (UV)^T(UV)\mathcal B_1) = \det(UV)^2\det(\mathcal B_1^T \mathcal B_1)$에서 $\det(UV) = \pm 1$을 얻는다. 그런데 $U, V$의 각 항은 모두 정수이므로, $\det U = \pm 1$이다. 
 
-을 생각해 보자. 이제
-
-$$
-\det(U)\det(U^{-1}) = \det({UU^{-1}}) = \det(I)=1
-$$
-
-이므로, $\det{U} = \pm 1$이어야 한다.[^1] 역으로 격자의 한 기저에다 $\det{U} = \pm 1$인 정수 행렬 $U$를 곱하여 무한히 많은 기저를 구할 수 있음을 알 수 있다! 이는 아주 중요한 성질이며 앞으로도 자주 써먹을 것이다.
-이러한 행렬 $U$의 집합을 **General Linear Group**(Over $\mathbb{Z}$)이라 하며 $\operatorname{GL}(n, \mathbb{Z})$라 쓴다.
+$\Leftarrow$) 적당한 unimodular $U$가 존재해서 $\mathcal B_1 = U\mathcal B_2$라고 하자. 그렇다면 $\mathcal B_1$의 각 열벡터는 $\mathcal B_2$의 정수계수 일차결합으로 이루어지므로, $\mathcal L (\mathcal B_1) \subseteq \mathcal L (\mathcal B_2)$이다. 비슷하게, $U^{-1}$또한 unimodular이므로(?) $\mathcal L (\mathcal B_2) \subseteq \mathcal L (\mathcal B_1)$이다. 따라서 결론을 얻는다.
 
 ### Fundemental Domain and volume of a Lattice
 
-격자는 이산적이기에, 체스판이 단위 칸으로 쪼개지듯 격자도 단위 칸으로 쪼개진다. 이 단위 칸을
+위 정리는 다음의 중요한 Corollary로 이어진다.
 
-$$
-\mathcal{P}(\mathcal{B}) := \left\{ \sum_{i=1}^n c_i\mathbf{b}_i : c_i \in \left[ -\frac{1}{2}, \frac{1}{2} \right)\right\}
-$$
+**Corollary.** 격자 $\mathcal L$과 임의의 기저 $\mathcal B$에 대해서, $\det \mathcal B$의 값은 언제나 일정하다. 
 
-이라 정의하고 **Fundemental Domain** (또는 Fundemental Parallelpiped)이라 한다. 책에 따라서는 위의 정의 대신에
+다른 말로 하면, $\det \mathcal B$는 격자에 대한 불변량(invariant)이다. 그런데 $\det \mathcal B$의 의미가 무엇일까? 행렬식의 기하학적 의미, 즉 부피를 생각해 본다면, 직관적으로 다음과 같은 격자의 "단위 칸"의 부피라고 할 수 있을 것이다.
 
-$$
-\mathcal{P}(\mathcal{B}) := \left\{ \sum_{i=1}^n c_i\mathbf{b}_i : c_i \in \left[ 0, 1 \right)\right\}
-$$
+이 단위 칸을 우리는 **Fundemental Domain**이라고 부른다.
 
-을 사용하는 경우도 있다. 이는 기준을 어디로 잡느냐의 문제이고, 본질적인 정의의 차이는 없다. 이하로는 더 아름다운 후자의 정의를 쓰겠다.
- 또한, 자명하게 $\mathcal{P}$를 모으면 전체집합 $\mathbb{R}^n$이 된다. 즉
+**Definition. (Fundemental Domain).** 격자 $\mathcal L(\mathcal B)$에 대해 집합
 
-$$
-\mathbb{R}^n = \bigcup_{\mathbf{v} \in \mathcal{L}} (\mathbf{v}+\mathcal{P}(\mathcal{B}))
-$$
+$$\mathcal{P}(\mathcal{B}) := \left\{ \sum_{i=1}^n c_i\mathbf{b}_i : c_i \in \left[ 0, 1 \right)\right\}$$
 
-가 성립한다. $\mathcal{P}$가 중요한 이유는 그 부피, 즉 $\operatorname{vol}(\mathcal{P})$가 어떤 격자 $\mathcal{L}$에 대해 불변량(invariant)이기 때문이다. 이제부터 살펴보자.
+을 이 격자의 Fundemental Domain이라고 한다.
 
-$\mathcal{L}$의 한 기저 $\mathcal{B}$의 원소를 $\mathbf{b}_i = (v\_{i1}, v\_{i2}, \cdots, v\_{in})$이라고 하자. 이제 이를 행렬로 표현해보면
+![Fundemental Domain](/images/introduction-to-lattice-cryptography/fundemental-domain.png)
 
-$$
-A =
-\begin{pmatrix}
-v_{11} & v_{12} & \cdots & v_{1n} \\
-v_{21} & v_{22} & \cdots & v_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-v_{n1} & v_{n2} & \cdots & v_{nn} \\
-\end{pmatrix}
-$$
+**Remark.** Fundemental Domain을 모으면 $\mathbb R^n$을 구성할 수 있다. 즉,
 
-이제 큐브 $C_n = [0, 1)^n$을 생각하면
+$$\mathbb R^n = \bigcup_{\mathbf v \in \mathcal L} (\mathbf v + \mathcal P)$$
 
-$$
-\mathcal{P} = C_n \cdot A
-$$
+이제 다음을 얻는다.
 
-로 표현할 수 있다. 이제 $\operatorname{vol}(\mathcal{P})$를 구해보면
+**Definition. (Volume of a Lattice).**  $\mathcal L(\mathcal B)$에 대해
 
-$$
-\begin{align}
-\operatorname{vol}(\mathcal{P}) &= \int_\mathcal{P} dx_1 dx_2 \cdots dx_n \\
-&= \int_{C_n \cdot A} dx_1 dx_2 \cdots dx_n \\
-&= \int_{C_n} \lvert \det(A) \rvert \ dx_1 dx_2 \cdots dx_n \\
-&= \lvert \det(A) \rvert \operatorname{vol}(C_n) \\
-&= \lvert \det(A) \rvert
-\end{align}
-$$
+$$\operatorname{vol}(\mathcal L) = \operatorname{vol}(\mathcal P(\mathcal B)) = \det \mathcal B$$
 
-그런데 서로 다른 두 기저는 행렬식이 $\pm 1$인 행렬을 곱해서 얻어낼 수 있으므로, 결국 어떤 $\mathcal{L}$에 대해 $\lvert \det(A) \rvert$의 값은 일정하다. 즉, $\lvert \det(A) \rvert = \operatorname{vol}(\mathcal{P})$는 $\mathcal{L}$의 불변량이다. 보통 이 값을 격자 $\mathcal{L}$의 **행렬식**(Determinant)라고 하며 $\det(\mathcal{L})$로 표기한다. 즉
-
-$$
-\det(\mathcal{L}) := \operatorname{vol}(\mathcal{P})
-$$
-
-이다.
-
-한편 $\det(\mathcal{L})$의 상한은 아래의 **Hadamard's Inequality**로 구할 수 있다. 격자 $\mathcal{L}$과 그 기저 $\mathcal{B}=(\mathbf{b}_1, \mathbf{b}_2, \cdots, \mathbf{b}_n)$에 대해
-
-$$
-\det(\mathcal{L}) = \operatorname{vol}(\mathcal{P}) \le \lVert \mathbf{b}_1 \rVert \lVert \mathbf{b}_2 \rVert \cdots \lVert \mathbf{b}_n \rVert
-$$
-
-이 때 부등호는 기저 $\mathcal{B}$가 서로 수직이면 성립한다. 반대로 말하면, 위 부등식이 등식에 가까워질수록 기저는 수직에 가까워진다. 이를 이용하여 기저가 수직인 정도를 구할 수 있는데, 이를 **Hadamard Ratio**라고 한다. 자세한 것은 다음 장에서 다룬다.
-
+의 값은 기저의 선택과 무관하다. 이 값을 격자의 부피로 정의한다.
 
 ## Lattice-Based Problems & Algorithms
 
 ### Lattice-Based Problems
 
-격자 암호에 쓰이는 문제에는 **SVP**(Shortest Vector Problem), **CVP**(Closest Vector Problem) 및 그 변종들이 있다. 이들의 공통점은 모두 격자 위의 *짧은 벡터*에 대한 문제라는 점이다.
+격자 암호에 쓰이는 문제에는 **SVP**(Shortest Vector Problem), **CVP**(Closest Vector Problem)가 있다. 이들의 공통점은 모두 격자 위의 *짧은 벡터*에 대한 문제라는 점이다.
 
-* **SVP**(Shortest Vector Problem): 격자 위의 가장 짧은 (0이 아닌) 벡터는 무엇인가?
-* **CVP**(Closest Vector Problem): 주어진 벡터와 가장 가까운 격자 위의 벡터는 무엇인가?
+- **SVP**(Shortest Vector Problem): 격자 위의 가장 짧은 (0이 아닌) 벡터는 무엇인가?
+- **CVP**(Closest Vector Problem): 주어진 벡터와 가장 가까운 격자 위의 벡터는 무엇인가?
 
-이들의 변종 또한 중요하게 다루어진다. 대표적으로 다음의 예가 있다.
-
-* **SBP**(Shortest Basis Problem): 주어진 격자의 가장 작은 기저는 무엇인가?
-* **apprSVP**(Approximate SVP): 주어진 상수 $\gamma$에 대해서 격자 위의 가장 짧은 벡터의 $\gamma$배보다 짧은 격자 위의 벡터는 무엇인가?
-* **apprCVP**(Approximate CVP): **apprSVP**의 **CVP** 버전.
-
-이제 본격적으로 수학적 background를 알아보자.
+이제 이 문제들을 공략해보도록 하자!
 
 ### Introduction to Short Vector on Lattice
 
